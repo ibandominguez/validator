@@ -25,11 +25,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * testRequiredMethodPasses
+   * testRequiredMethod
    *
    * @test
    */
-  public function testRequiredMethodPasses()
+  public function testRequiredMethod()
   {
     $inputs = array('name' => 'hello');
     $rules = array('name' => 'required');
@@ -90,6 +90,70 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
     $errors = $v->getErrors();
 
     $this->assertEquals($messages['name'], $errors['name'], 'Failed asserting that custom message was passed in');
+  }
+
+  /**
+   * testArrayMethod
+   *
+   * @test
+   */
+  public function testArrayMethod()
+  {
+    $inputs = array('array' => array());
+    $rules = array('array' => 'array');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertTrue($v->passes());
+
+    $this->assertEquals(array(), $inputs['array'], 'Failed asserting that array method works');
+  }
+
+  /**
+   * testArrayMethodFails
+   *
+   * @test
+   */
+  public function testArrayMethodFails()
+  {
+    $inputs = array('array' => '');
+    $rules = array('array' => 'array');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertFalse($v->passes());
+
+    $this->assertNotEquals(array(), $inputs['array'], 'Failed asserting that array method works');
+  }
+
+  /**
+   * testEmail
+   *
+   * @test
+   */
+  public function testEmailMethod()
+  {
+    $inputs = array('email' => 'your@email.com');
+    $rules = array('email' => 'email');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertTrue($v->passes());
+  }
+
+  /**
+   * testEmailFails
+   *
+   * @test
+   */
+  public function testEmailMethodFails()
+  {
+    $inputs = array('email' => 'your');
+    $rules = array('email' => 'email');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertFalse($v->passes());
   }
 
 }
