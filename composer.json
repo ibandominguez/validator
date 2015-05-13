@@ -1,12 +1,7 @@
 {
   "name": "easycoding/validator",
-  "description": "validation class",
-  "require": {
-    "php": ">= 5.2.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~4.6"
-  },
+  "description": "validation class to take care of repetitive tasks",
+  "keywords": ["validation", "validate", "required"],
   "license": "MIT",
   "authors": [
     {
@@ -14,6 +9,12 @@
       "email": "ibandominguez@live.com"
     }
   ],
+  "require": {
+    "php": ">= 5.2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.6"
+  },
   "autoload": {
     "psr-4": {
       "EasyCoding\\": "src/"
