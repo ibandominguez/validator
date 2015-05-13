@@ -58,6 +58,23 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
+   * testExpectedErrorMessage
+   *
+   * @test
+   */
+  public function testExpectedErrorMessage()
+  {
+    $inputs = array('name' => '');
+    $rules = array('name' => 'required');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $errors = $v->getErrors();
+
+    $this->assertEquals('name, rule: required', $errors['name'], 'Failed asserting that message is outputed correctly');
+  }
+
+  /**
    * testRequiredCustomMessage
    *
    * @test

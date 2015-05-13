@@ -123,7 +123,7 @@ class Validator {
         if (method_exists($this, $methodName)) {
           if (!$this->$methodName($key, $rule, $params)) {
             $this->passes = false;
-            $this->errors[$key] = isset($this->messages[$key]) ? $this->messages[$key] : $key . " is " . $rule;
+            $this->errors[$key] = isset($this->messages[$key]) ? $this->messages[$key] : $key . ", rule: " . $rule;
           }
         } else {
           throw new \BadMethodCallException($methodName . ' method does not exists');
