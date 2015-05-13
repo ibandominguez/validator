@@ -139,10 +139,35 @@ class Validator {
    *
    * @param string
    * @param string
+   * @param string
    * @return boolean
    */
   protected function validateRequired($key, $validation, $params) {
     return !empty($this->inputs[$key]);
+  }
+
+  /**
+   * validate array
+   *
+   * @param string
+   * @param string
+   * @param string
+   * @return boolean
+   */
+  protected function validateArray($key, $validation, $params) {
+    return is_array($this->inputs[$key]);
+  }
+
+  /**
+   * validate email
+   *
+   * @param string
+   * @param string
+   * @param string
+   * @return boolean
+   */
+  protected function validateEmail($key, $validation, $params) {
+    return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
   }
 
 }
