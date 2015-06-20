@@ -1,6 +1,7 @@
 # validator
 
 [![Build Status](https://travis-ci.org/ibandominguez/validator.svg?branch=travis)](https://travis-ci.org/ibandominguez/validator)
+[![Latest Stable Version](https://poser.pugx.org/easycoding/validator/v/stable)](https://packagist.org/packages/easycoding/validator) [![Total Downloads](https://poser.pugx.org/easycoding/validator/downloads)](https://packagist.org/packages/easycoding/validator) [![Latest Unstable Version](https://poser.pugx.org/easycoding/validator/v/unstable)](https://packagist.org/packages/easycoding/validator) [![License](https://poser.pugx.org/easycoding/validator/license)](https://packagist.org/packages/easycoding/validator)
 
 > validator is a helper class for repetitive validation processes.
 
