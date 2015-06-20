@@ -127,7 +127,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * testEmail
+   * testEmailMethod
    *
    * @test
    */
@@ -142,7 +142,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * testEmailFails
+   * testEmailMethodFails
    *
    * @test
    */
@@ -150,6 +150,36 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
   {
     $inputs = array('email' => 'your');
     $rules = array('email' => 'email');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertFalse($v->passes());
+  }
+
+  /**
+   * testNumericMethod
+   *
+   * @test
+   */
+  public function testNumericMethod()
+  {
+    $inputs = array('number' => '1', 'othernumber' => 2);
+    $rules = array('number' => 'numeric', 'othernumber' => 'numeric');
+
+    $v = new \EasyCoding\Validator($inputs, $rules);
+
+    $this->assertTrue($v->passes());
+  }
+
+  /**
+   * testNumericMethodFails
+   *
+   * @test
+   */
+  public function testNumericMethodFails()
+  {
+    $inputs = array('number' => 'nonumber');
+    $rules = array('number' => 'numeric');
 
     $v = new \EasyCoding\Validator($inputs, $rules);
 
