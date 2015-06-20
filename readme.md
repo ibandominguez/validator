@@ -10,12 +10,12 @@ Clone or Download this package or install via composer
 
 > composer require easycoding/validator
 
-## Available Rules by '13/May/15'
+## Available Rules by '20/Jun/15'
 
-#### required: check if the given input exists and it is not empty
-#### email: check if the given input is a valid email
-#### array: check if the given input is a valid array
-#### numeric: check if the given input is a numeric value
+* required: check if the given input exists and it is not empty
+* email: check if the given input is a valid email
+* array: check if the given input is a valid array
+* numeric: check if the given input is a numeric value
 
 ## Use example
 
