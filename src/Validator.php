@@ -170,4 +170,16 @@ class Validator {
     return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
   }
 
+  /**
+   * validate numeric
+   *
+   * @param string
+   * @param string
+   * @param string
+   * @return boolean
+   */
+  protected function validateNumeric($key, $validation, $params) {
+    return is_numeric($this->inputs[$key]);
+  }
+
 }
