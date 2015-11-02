@@ -1,185 +1,156 @@
 <?php
 
+/**
+ * EasyCoding\Validator
+ *
+ * PHP Version >= 5.3.0
+ *
+ * @author    Ibán Domínguez <ibandominguez@hotmail.com>
+ * @copyright 2014-2015 Ibán Domínguez (http://www.ibandominguez.com)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/ibandominguez/validator
+ */
+
 namespace EasyCoding;
 
-class Validator {
+class Validator
+{
+    /**
+     * @var
+     */
+    protected $inputs = array();
 
-  /**
-   * inputs
-   *
-   * @var
-   */
-  protected $inputs = array();
+    /**
+     * @var
+     */
+    protected $rules = array();
 
-  /**
-   * rules
-   *
-   * @var
-   */
-  protected $rules = array();
+    /**
+     * @var
+     */
+    protected $messages = array();
 
-  /**
-   * messages
-   *
-   * @var
-   */
-  protected $messages = array();
+    /**
+     * @var
+     */
+    protected $errors = array();
 
-  /**
-   * errors
-   *
-   * @var
-   */
-  protected $errors = array();
+    /**
+     * @var
+     */
+    protected $passes = true;
 
-  /**
-   * passes
-   *
-   * @var
-   */
-  protected $passes = true;
+    /**
+     * @param array
+     * @param array
+     * @param array
+     * @return void
+     */
+    public function __construct(array $inputs = array(), array $rules = array(), array $messages = array())
+    {
+        $this->inputs = $inputs;
+        $this->rules = $rules;
+        $this->messages = $messages;
+        $this->validate();
+    }
 
-  /**
-   * PUBLIC METHODS
-   */
+    /**
+     * @return boolean
+     */
+    public function passes()
+    {
+        return $this->passes;
+    }
 
-  /**
-   * __construct
-   *
-   * @param array inputs
-   * @param array rules
-   * @param array messages
-   * @return void
-   */
-  public function __construct(array $inputs = array(), array $rules = array(), array $messages = array())
-  {
-    // let´s set the data
-    // so we can make use of it
-    // through the methods
-    $this->inputs = $inputs;
-    $this->rules = $rules;
-    $this->messages = $messages;
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
 
-    // let´s trigger the validate method
-    $this->validate();
-  }
+    /**
+     * @return void
+     */
+    protected function validate()
+    {
+        // lets get the ruleset
+        // where $v is something like 'required|email|size:8'
+        foreach ($this->rules as $key => $value) :
+            $ruleset = explode('|', $value);
 
-  /**
-   * passes
-   *
-   * @return boolean
-   */
-  public function passes()
-  {
-    return $this->passes;
-  }
+            // lets get the params from the ruleset
+            // where $v is something like 'size:8'
+            foreach ($ruleset as $rule) :
+                $pos = strpos($rule, ':');
+                $params = '';
 
-  /**
-   * errors
-   *
-   * @return array
-   */
-  public function getErrors()
-  {
-    return $this->errors;
-  }
+                if ($pos !== false) {
+                    $params = substr($rule, $pos + 1);
+                    $rule = substr($rule, 0, $pos);
+                }
 
-  /**
-   * PROTECTED METHODS
-   */
+                // now we have rule and params
+                // so we need to find out if
+                // there's a method to validate
+                $methodName = 'validate' . ucfirst($rule);
 
-  /**
-   * validate
-   *
-   * takes care of global validation
-   *
-   *
-   * @return void
-   */
-  protected function validate()
-  {
-    // lets get the ruleset
-    // where $v is something like 'required|email|size:8'
-    foreach ($this->rules as $key => $value) :
+                if (method_exists($this, $methodName)) {
+                    if (!$this->$methodName($key, $rule, $params)) {
+                        $this->passes = false;
+                        $this->errors[$key] = isset($this->messages[$key]) ? $this->messages[$key] : $key . ", rule: " . $rule;
+                    }
+                } else {
+                    throw new \BadMethodCallException($methodName . ' method does not exists');
+                }
 
-      $ruleset = explode('|', $value);
+            endforeach;
 
-      // lets get the params from the ruleset
-      // where $v is something like 'size:8'
-      foreach ($ruleset as $rule) :
-        $pos = strpos($rule, ':');
-        $params = '';
+        endforeach;
+    }
 
-        if ($pos !== false) {
-          $params = substr($rule, $pos + 1);
-          $rule = substr($rule, 0, $pos);
-        }
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateRequired($key, $validation, $params)
+    {
+        return !empty($this->inputs[$key]);
+    }
 
-        // now we have rule and params
-        // so we need to find out if
-        // there's a method to validate
-        $methodName = 'validate' . ucfirst($rule);
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateArray($key, $validation, $params)
+    {
+        return is_array($this->inputs[$key]);
+    }
 
-        if (method_exists($this, $methodName)) {
-          if (!$this->$methodName($key, $rule, $params)) {
-            $this->passes = false;
-            $this->errors[$key] = isset($this->messages[$key]) ? $this->messages[$key] : $key . ", rule: " . $rule;
-          }
-        } else {
-          throw new \BadMethodCallException($methodName . ' method does not exists');
-        }
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateEmail($key, $validation, $params)
+    {
+        return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
+    }
 
-      endforeach;
-
-    endforeach;
-  }
-
-  /**
-   * validate required
-   *
-   * @param string
-   * @param string
-   * @param string
-   * @return boolean
-   */
-  protected function validateRequired($key, $validation, $params) {
-    return !empty($this->inputs[$key]);
-  }
-
-  /**
-   * validate array
-   *
-   * @param string
-   * @param string
-   * @param string
-   * @return boolean
-   */
-  protected function validateArray($key, $validation, $params) {
-    return is_array($this->inputs[$key]);
-  }
-
-  /**
-   * validate email
-   *
-   * @param string
-   * @param string
-   * @param string
-   * @return boolean
-   */
-  protected function validateEmail($key, $validation, $params) {
-    return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
-  }
-
-  /**
-   * validate numeric
-   *
-   * @param string
-   * @param string
-   * @param string
-   * @return boolean
-   */
-  protected function validateNumeric($key, $validation, $params) {
-    return is_numeric($this->inputs[$key]);
-  }
-
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateNumeric($key, $validation, $params)
+    {
+        return is_numeric($this->inputs[$key]);
+    }
 }
