@@ -1,73 +1,60 @@
 <?php
 
+/**
+ * EasyCoding\Validator
+ *
+ * PHP Version >= 5.3.0
+ *
+ * @author    Ibán Domínguez <ibandominguez@hotmail.com>
+ * @copyright 2014-2015 Ibán Domínguez (http://www.ibandominguez.com)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/ibandominguez/validator
+ */
+
 namespace EasyCoding;
 
 class Validator
 {
-
     /**
-     * inputs
-     *
      * @var
      */
     protected $inputs = array();
 
     /**
-     * rules
-     *
      * @var
      */
     protected $rules = array();
 
     /**
-     * messages
-     *
      * @var
      */
     protected $messages = array();
 
     /**
-     * errors
-     *
      * @var
      */
     protected $errors = array();
 
     /**
-     * passes
-     *
      * @var
      */
     protected $passes = true;
 
     /**
-     * PUBLIC METHODS
-     */
-
-    /**
-     * __construct
-     *
-     * @param array inputs
-     * @param array rules
-     * @param array messages
+     * @param array
+     * @param array
+     * @param array
      * @return void
      */
     public function __construct(array $inputs = array(), array $rules = array(), array $messages = array())
     {
-        // let´s set the data
-        // so we can make use of it
-        // through the methods
         $this->inputs = $inputs;
         $this->rules = $rules;
         $this->messages = $messages;
-
-        // let´s trigger the validate method
         $this->validate();
     }
 
     /**
-     * passes
-     *
      * @return boolean
      */
     public function passes()
@@ -76,8 +63,6 @@ class Validator
     }
 
     /**
-     * errors
-     *
      * @return array
      */
     public function getErrors()
@@ -86,15 +71,6 @@ class Validator
     }
 
     /**
-     * PROTECTED METHODS
-     */
-
-    /**
-     * validate
-     *
-     * takes care of global validation
-     *
-     *
      * @return void
      */
     protected function validate()
@@ -102,7 +78,6 @@ class Validator
         // lets get the ruleset
         // where $v is something like 'required|email|size:8'
         foreach ($this->rules as $key => $value) :
-
             $ruleset = explode('|', $value);
 
             // lets get the params from the ruleset
@@ -136,8 +111,6 @@ class Validator
     }
 
     /**
-     * validate required
-     *
      * @param string
      * @param string
      * @param string
@@ -149,8 +122,6 @@ class Validator
     }
 
     /**
-     * validate array
-     *
      * @param string
      * @param string
      * @param string
@@ -162,8 +133,6 @@ class Validator
     }
 
     /**
-     * validate email
-     *
      * @param string
      * @param string
      * @param string
@@ -175,8 +144,6 @@ class Validator
     }
 
     /**
-     * validate numeric
-     *
      * @param string
      * @param string
      * @param string
@@ -186,5 +153,4 @@ class Validator
     {
         return is_numeric($this->inputs[$key]);
     }
-
 }
