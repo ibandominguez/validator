@@ -1,23 +1,23 @@
 <?php
 
+/**
+ * EasyCoding\Validator
+ *
+ * PHP Version >= 5.3.0
+ *
+ * @author    Ibán Domínguez <ibandominguez@hotmail.com>
+ * @copyright 2014-2015 Ibán Domínguez (http://www.ibandominguez.com)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      https://github.com/ibandominguez/validator
+ */
+
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
-
-    /**
-     * test instance
-     *
-     * @test
-     */
     public function testInstance()
     {
         $this->assertInstanceOf('\EasyCoding\Validator', new \EasyCoding\Validator);
     }
 
-    /**
-     * testPassesByDefault
-     *
-     * @test
-     */
     public function testPassesByDefault()
     {
         $v = new \EasyCoding\Validator();
@@ -25,11 +25,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->passes(), 'Failed asserting that validation passes by default');
     }
 
-    /**
-     * testRequiredMethod
-     *
-     * @test
-     */
     public function testRequiredMethod()
     {
         $inputs = array('name' => 'hello');
@@ -41,11 +36,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertCount(0, $v->getErrors(), 'Failed asserting that they were no errors');
     }
 
-    /**
-     * testRequiredMethodFails
-     *
-     * @test
-     */
     public function testRequiredMethodFails()
     {
         $inputs = array('name' => '');
@@ -58,11 +48,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('name', $v->getErrors(), 'Failed asserting that errors contains name');
     }
 
-    /**
-     * testExpectedErrorMessage
-     *
-     * @test
-     */
     public function testExpectedErrorMessage()
     {
         $inputs = array('name' => '');
@@ -75,11 +60,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('name, rule: required', $errors['name'], 'Failed asserting that message is outputed correctly');
     }
 
-    /**
-     * testRequiredCustomMessage
-     *
-     * @test
-     */
     public function testRequiredCustomMessage()
     {
         $inputs = array('name' => '');
@@ -93,11 +73,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($messages['name'], $errors['name'], 'Failed asserting that custom message was passed in');
     }
 
-    /**
-     * testArrayMethod
-     *
-     * @test
-     */
     public function testArrayMethod()
     {
         $inputs = array('array' => array());
@@ -110,11 +85,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $inputs['array'], 'Failed asserting that array method works');
     }
 
-    /**
-     * testArrayMethodFails
-     *
-     * @test
-     */
     public function testArrayMethodFails()
     {
         $inputs = array('array' => '');
@@ -127,11 +97,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(array(), $inputs['array'], 'Failed asserting that array method works');
     }
 
-    /**
-     * testEmailMethod
-     *
-     * @test
-     */
     public function testEmailMethod()
     {
         $inputs = array('email' => 'your@email.com');
@@ -142,11 +107,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->passes());
     }
 
-    /**
-     * testEmailMethodFails
-     *
-     * @test
-     */
     public function testEmailMethodFails()
     {
         $inputs = array('email' => 'your');
@@ -157,11 +117,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($v->passes());
     }
 
-    /**
-     * testNumericMethod
-     *
-     * @test
-     */
     public function testNumericMethod()
     {
         $inputs = array('number' => '1', 'othernumber' => 2);
@@ -172,11 +127,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->passes());
     }
 
-    /**
-     * testNumericMethodFails
-     *
-     * @test
-     */
     public function testNumericMethodFails()
     {
         $inputs = array('number' => 'nonumber');
@@ -186,5 +136,4 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($v->passes());
     }
-
 }
