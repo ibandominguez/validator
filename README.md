@@ -13,10 +13,22 @@ Clone or Download this package or install via composer
 
 ## Available Rules by '20/Jun/15'
 
-* required: check if the given input exists and it is not empty
-* email: check if the given input is a valid email
-* array: check if the given input is a valid array
-* numeric: check if the given input is a numeric value
+| Title | Description |
+| ----- | ----------- |
+| required | check if the given input exists and it is not empty  |
+| email  | check if the given input is a valid email  |
+| array | check if the given input is a valid array |
+| numeric | check if the given input is a numeric value |
+
+## Rules Roadmap
+
+* min 
+* max 
+* between 
+* date
+* date format
+* alpha
+* alpha numeric
 
 ## Use example
 
