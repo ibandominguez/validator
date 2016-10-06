@@ -179,8 +179,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testDatetimeMethod()
     {
-        $inputs = array('datime' => '2016-12-01 12:00:00');
-        $rules = array('datime' => 'datetime');
+        $inputs = array('datetime' => '2016-12-01 12:00:00');
+        $rules = array('datetime' => 'datetime');
 
         $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
@@ -201,6 +201,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $inputs = array('datetime' => '2016-12-01 24:00:00');
         $rules = array('datetime' => 'datetime');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
+
+    public function testTimeMethod()
+    {
+        $inputs = array('time' => '12:00:00');
+        $rules = array('time' => 'time');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testTimeMethodFails()
+    {
+        $inputs = array('time' => '201asdf');
+        $rules = array('time' => 'time');
 
         $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
