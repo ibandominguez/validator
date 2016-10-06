@@ -186,4 +186,15 @@ class Validator
     {
         return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", $this->inputs[$key]);
     }
+
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateTime($key, $validation, $params)
+    {
+        return preg_match("/^(0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", $this->inputs[$key]);
+    }
 }
