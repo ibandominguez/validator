@@ -156,4 +156,24 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($v->passes());
     }
+
+    public function testDateMethod()
+    {
+        $inputs = array('date' => '2016-12-01');
+        $rules = array('date' => 'date');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testDateMethodFails()
+    {
+        $inputs = array('date' => '201asdf');
+        $rules = array('date' => 'date');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
 }
