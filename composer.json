@@ -1,5 +1,5 @@
 {
-  "name": "easycoding/validator",
+  "name": "ibandominguez/validator",
   "description": "validation class to take care of repetitive tasks",
   "keywords": ["validation", "validate", "required"],
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "EasyCoding\\": "src/"
+      "IbanDominguez\\Validator\\": "src/"
     }
   },
   "minimum-stability": "stable"

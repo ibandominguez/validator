@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EasyCoding\Validator
+ * IbanDominguez\Validator\Validator
  *
  * PHP Version >= 5.3.0
  *
@@ -11,7 +11,7 @@
  * @link      https://github.com/ibandominguez/validator
  */
 
-namespace EasyCoding;
+namespace IbanDominguez\Validator;
 
 class Validator
 {

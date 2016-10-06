@@ -22,9 +22,9 @@ Clone or Download this package or install via composer
 
 ## Rules Roadmap
 
-* min 
-* max 
-* between 
+* min
+* max
+* between
 * date
 * date format
 * alpha
@@ -35,11 +35,14 @@ Clone or Download this package or install via composer
 In your application:
 
 ```php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
 
 $inputs = array('name' => '', 'email' => 'johndoe@email.com');
 $rules = array('name' => 'required', 'email' => 'required|email');
 
-$v = new \EasyGoing\Validator($inputs, $rules);
+$v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
 $v->passes(); // => false
 $v->getErrors(); // => array('name' => 'name, rule: required');
