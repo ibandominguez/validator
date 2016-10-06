@@ -19,6 +19,7 @@ Clone or Download this package or install via composer
 | email  | check if the given input is a valid email  |
 | array | check if the given input is a valid array |
 | numeric | check if the given input is a numeric value |
+| string | check if the given input is a string value |
 
 ## Rules Roadmap
 
