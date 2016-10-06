@@ -156,4 +156,74 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($v->passes());
     }
+
+    public function testDateMethod()
+    {
+        $inputs = array('date' => '2016-12-01');
+        $rules = array('date' => 'date');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testDateMethodFails()
+    {
+        $inputs = array('date' => '201asdf');
+        $rules = array('date' => 'date');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
+
+    public function testDatetimeMethod()
+    {
+        $inputs = array('datetime' => '2016-12-01 12:00:00');
+        $rules = array('datetime' => 'datetime');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testDatetimeMethodFails()
+    {
+        $inputs = array('datetime' => '201asdf');
+        $rules = array('datetime' => 'datetime');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
+
+    public function testDatetimeMethodFailsWhenHourIsGreaterThan23()
+    {
+        $inputs = array('datetime' => '2016-12-01 24:00:00');
+        $rules = array('datetime' => 'datetime');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
+
+    public function testTimeMethod()
+    {
+        $inputs = array('time' => '12:00:00');
+        $rules = array('time' => 'time');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testTimeMethodFails()
+    {
+        $inputs = array('time' => '201asdf');
+        $rules = array('time' => 'time');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
 }

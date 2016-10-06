@@ -20,13 +20,15 @@ Clone or Download this package or install via composer
 | array | check if the given input is a valid array |
 | numeric | check if the given input is a numeric value |
 | string | check if the given input is a string value |
+| date | check if the given input is a date value with the format (yyyy-mm-dd) |
+| datetime | check if the given input is a datetime value with the format (yyyy-mm-dd hh:ii:ss) |
+| time | check if the given input is a time value with the format (hh:ii:ss) |
 
 ## Rules Roadmap
 
 * min
 * max
 * between
-* date
 * date format
 * alpha
 * alpha numeric
