@@ -136,4 +136,24 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($v->passes());
     }
+
+    public function testStringMethod()
+    {
+        $inputs = array('string' => 'stringexample');
+        $rules = array('string' => 'string');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertTrue($v->passes());
+    }
+
+    public function testStringMethodFails()
+    {
+        $inputs = array('string' => '1');
+        $rules = array('string' => 'string');
+
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
+
+        $this->assertFalse($v->passes());
+    }
 }
