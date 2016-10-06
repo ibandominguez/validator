@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EasyCoding\Validator
+ * IbanDominguez\Validator\Validator
  *
  * PHP Version >= 5.3.0
  *
@@ -15,12 +15,12 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 {
     public function testInstance()
     {
-        $this->assertInstanceOf('\EasyCoding\Validator', new \EasyCoding\Validator);
+        $this->assertInstanceOf('IbanDominguez\Validator\Validator', new IbanDominguez\Validator\Validator);
     }
 
     public function testPassesByDefault()
     {
-        $v = new \EasyCoding\Validator();
+        $v = new IbanDominguez\Validator\Validator();
 
         $this->assertTrue($v->passes(), 'Failed asserting that validation passes by default');
     }
@@ -30,7 +30,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('name' => 'hello');
         $rules = array('name' => 'required');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertTrue($v->passes(), 'Failed asserting that required validation fails if empty value');
         $this->assertCount(0, $v->getErrors(), 'Failed asserting that they were no errors');
@@ -41,7 +41,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('name' => '');
         $rules = array('name' => 'required');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertFalse($v->passes(), 'Failed asserting that required validation fails if empty value');
         $this->assertCount(1, $v->getErrors(), 'Failed asserting that errors length is one');
@@ -53,7 +53,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('name' => '');
         $rules = array('name' => 'required');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $errors = $v->getErrors();
 
@@ -66,7 +66,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $rules = array('name' => 'required');
         $messages = array('name' => 'el nombre es obligatorio');
 
-        $v = new \EasyCoding\Validator($inputs, $rules, $messages);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules, $messages);
 
         $errors = $v->getErrors();
 
@@ -78,7 +78,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('array' => array());
         $rules = array('array' => 'array');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertTrue($v->passes());
 
@@ -90,7 +90,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('array' => '');
         $rules = array('array' => 'array');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertFalse($v->passes());
 
@@ -102,7 +102,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('email' => 'your@email.com');
         $rules = array('email' => 'email');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertTrue($v->passes());
     }
@@ -112,7 +112,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('email' => 'your');
         $rules = array('email' => 'email');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertFalse($v->passes());
     }
@@ -122,7 +122,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('number' => '1', 'othernumber' => 2);
         $rules = array('number' => 'numeric', 'othernumber' => 'numeric');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertTrue($v->passes());
     }
@@ -132,7 +132,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $inputs = array('number' => 'nonumber');
         $rules = array('number' => 'numeric');
 
-        $v = new \EasyCoding\Validator($inputs, $rules);
+        $v = new IbanDominguez\Validator\Validator($inputs, $rules);
 
         $this->assertFalse($v->passes());
     }
