@@ -118,7 +118,7 @@ class Validator
      */
     protected function validateRequired($key, $validation, $params)
     {
-        return !empty($this->inputs[$key]);
+        return !empty(@$this->inputs[$key]);
     }
 
     /**
@@ -129,7 +129,7 @@ class Validator
      */
     protected function validateArray($key, $validation, $params)
     {
-        return is_array($this->inputs[$key]);
+        return is_array(@$this->inputs[$key]);
     }
 
     /**
@@ -140,7 +140,7 @@ class Validator
      */
     protected function validateEmail($key, $validation, $params)
     {
-        return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
+        return filter_var(@$this->inputs[$key], FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -151,7 +151,7 @@ class Validator
      */
     protected function validateNumeric($key, $validation, $params)
     {
-        return is_numeric($this->inputs[$key]);
+        return is_numeric(@$this->inputs[$key]);
     }
 
     /**
@@ -162,7 +162,7 @@ class Validator
      */
     protected function validateString($key, $validation, $params)
     {
-        return is_string($this->inputs[$key]) && !is_numeric($this->inputs[$key]);
+        return is_string(@$this->inputs[$key]) && !is_numeric(@$this->inputs[$key]);
     }
 
     /**
@@ -173,7 +173,7 @@ class Validator
      */
     protected function validateDate($key, $validation, $params)
     {
-        return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $this->inputs[$key]);
+        return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", @$this->inputs[$key]);
     }
 
     /**
@@ -184,7 +184,7 @@ class Validator
      */
     protected function validateDatetime($key, $validation, $params)
     {
-        return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", $this->inputs[$key]);
+        return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", @$this->inputs[$key]);
     }
 
     /**
@@ -195,6 +195,6 @@ class Validator
      */
     protected function validateTime($key, $validation, $params)
     {
-        return preg_match("/^(0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", $this->inputs[$key]);
+        return preg_match("/^(0[0-9]|1[0-9]|2[0123])\:([012345][0-9])\:([012345][0-9])$/", @$this->inputs[$key]);
     }
 }
