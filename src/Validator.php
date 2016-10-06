@@ -153,4 +153,15 @@ class Validator
     {
         return is_numeric($this->inputs[$key]);
     }
+
+    /**
+     * @param string
+     * @param string
+     * @param string
+     * @return boolean
+     */
+    protected function validateString($key, $validation, $params)
+    {
+        return is_string($this->inputs[$key]) && !is_numeric($this->inputs[$key]);
+    }
 }
