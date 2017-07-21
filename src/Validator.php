@@ -118,7 +118,7 @@ class Validator
      */
     protected function validateRequired($key, $validation, $params)
     {
-        return !empty(@$this->inputs[$key]);
+        return !empty($this->inputs[$key]);
     }
 
     /**
@@ -129,7 +129,7 @@ class Validator
      */
     protected function validateArray($key, $validation, $params)
     {
-        return is_array(@$this->inputs[$key]);
+        return is_array($this->inputs[$key]);
     }
 
     /**
@@ -140,7 +140,7 @@ class Validator
      */
     protected function validateEmail($key, $validation, $params)
     {
-        return filter_var(@$this->inputs[$key], FILTER_VALIDATE_EMAIL);
+        return filter_var($this->inputs[$key], FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -151,7 +151,7 @@ class Validator
      */
     protected function validateNumeric($key, $validation, $params)
     {
-        return is_numeric(@$this->inputs[$key]);
+        return is_numeric($this->inputs[$key]);
     }
 
     /**
@@ -162,7 +162,7 @@ class Validator
      */
     protected function validateString($key, $validation, $params)
     {
-        return is_string(@$this->inputs[$key]) && !is_numeric(@$this->inputs[$key]);
+        return is_string($this->inputs[$key]) && !is_numeric($this->inputs[$key]);
     }
 
     /**
