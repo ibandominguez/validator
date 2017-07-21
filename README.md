@@ -11,7 +11,7 @@ Clone or Download this package or install via composer
 
 > composer require ibandominguez/validator
 
-## Available Rules by '20/Jun/15'
+## Available Rules
 
 | Title | Description |
 | ----- | ----------- |
